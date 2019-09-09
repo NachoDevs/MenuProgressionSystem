@@ -89,8 +89,6 @@ public class LevelButton : MonoBehaviour
     {
         m_uiManager.selectedLevel = levelID;
 
-        print(levelID);
-
         StartSelectedLevel();
     }
 

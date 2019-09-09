@@ -109,8 +109,6 @@ public class UIManager : MonoBehaviour
             //      the las level was very easy for the student
             UnlockNextLevels((score > 9) ? 2 : 1);
         }
-
-        print(score);
     }
 
     /// <summary>
