@@ -106,7 +106,7 @@ public class Minigame : MonoBehaviour
         m_uiManager.EvaluateScore(levelDifficulty, m_currTime - m_startTime);
 
         // If we pass this level, the amount of tries gets reseted for a future try
-        m_uiManager.m_amountOfTries[currentLevel - 1] = 0;
+        m_uiManager.m_amountOfTries[currentLevel] = 0;
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ public class Minigame : MonoBehaviour
         int currentLevel = m_uiManager.selectedLevel;
 
         // If we don't pass this level, the amount of tries gets incremented
-        ++m_uiManager.m_amountOfTries[currentLevel - 1];
+        ++m_uiManager.m_amountOfTries[currentLevel];
     }
 }
 

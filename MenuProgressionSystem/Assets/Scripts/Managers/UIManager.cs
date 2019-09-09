@@ -97,7 +97,7 @@ public class UIManager : MonoBehaviour
         float difficultyModifier = (float) t_levelDifficulty / 10;
 
         // The amount of tries penalize the score
-        score -= (float)(m_amountOfTries[selectedLevel - 1]) * 5 * difficultyModifier;
+        score -= (float)(m_amountOfTries[selectedLevel]) * 5 * difficultyModifier;
 
         // The more ammount of time spent the worst the score recived
         score -= (t_timeSpent % 10) * .5f;  // Every 10 seconds we lose half a point
@@ -109,6 +109,8 @@ public class UIManager : MonoBehaviour
             //      the las level was very easy for the student
             UnlockNextLevels((score > 9) ? 2 : 1);
         }
+
+        print(score);
     }
 
     /// <summary>
@@ -118,12 +120,20 @@ public class UIManager : MonoBehaviour
     private void UnlockNextLevels(int t_numOfLevelsToUnlock)
     {
         // Unlock the corresponding levels
-        for (int i = (int) progressionBar.value; i < progressionBar.value + t_numOfLevelsToUnlock; ++i)
+        for (int i = 0; i < t_numOfLevelsToUnlock + 1; ++i)
         {
-            m_levels[i].ToggleLocked(true);
+            m_levels[selectedLevel + i].ToggleLocked(true);
+
+            // If we are advancing two levels but there is only one remaining this
+            //      will stop from looking into an unexisting element of the list
+            if(selectedLevel + i + 2 > m_levels.Count)
+            {
+                t_numOfLevelsToUnlock -= 1;
+                break;
+            }
         }
 
         // Update the level slider
-        progressionBar.value += t_numOfLevelsToUnlock;
+        progressionBar.value = selectedLevel + t_numOfLevelsToUnlock;
     }
 }

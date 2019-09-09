@@ -65,13 +65,13 @@ public class LevelButton : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        levelID = ++idCount;
+        levelID = idCount++;
 
         // Assign level name based on its level number
-        m_textComponent.text = m_levelBaseName + levelID.ToString();
+        m_textComponent.text = m_levelBaseName + (levelID + 1).ToString();
 
         // If we are the first level we are unlocked
-        isUnlocked = (levelID < 2);
+        isUnlocked = (levelID < 1);
 
         // Assign the locked sprite by default unless is the first level
         m_buttonComponent.image.sprite = (isUnlocked) ?  m_unlockedSprite : m_lockedSprite;
@@ -88,6 +88,8 @@ public class LevelButton : MonoBehaviour
     public void ChooseLevel()
     {
         m_uiManager.selectedLevel = levelID;
+
+        print(levelID);
 
         StartSelectedLevel();
     }
